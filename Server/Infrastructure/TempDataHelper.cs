@@ -7,7 +7,8 @@
 		}
 
 		public static void Put<T>
-			(this Microsoft.AspNetCore.Mvc.ViewFeatures.ITempDataDictionary tempData, string key, T value) where T : class
+			(this Microsoft.AspNetCore.Mvc.ViewFeatures.ITempDataDictionary
+			tempData, string key, T value) where T : class
 		{
 			//var options =
 			//	new System.Text.Json.JsonSerializerOptions
@@ -28,7 +29,8 @@
 		}
 
 		public static T? Get<T>
-			(this Microsoft.AspNetCore.Mvc.ViewFeatures.ITempDataDictionary tempData, string key) where T : class
+			(this Microsoft.AspNetCore.Mvc.ViewFeatures.ITempDataDictionary
+			tempData, string key) where T : class
 		{
 			object? obj =
 				tempData[key: key] as T;

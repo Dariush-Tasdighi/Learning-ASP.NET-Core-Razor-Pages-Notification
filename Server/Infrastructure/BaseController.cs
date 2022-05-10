@@ -1,5 +1,8 @@
 ﻿namespace Infrastructure
 {
+	/// <summary>
+	/// Version 3.0
+	/// </summary>
 	public class BaseController :
 		Microsoft.AspNetCore.Mvc.Controller, Messages.IMessageHandler
 	{
