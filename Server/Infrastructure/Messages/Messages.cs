@@ -2,6 +2,7 @@
 {
 	/// <summary>
 	/// Version 2.0
+	/// کلاس مناسبی که متاسفانه برای این منظور کاربردی ندارد
 	/// </summary>
 	public class Messages : object
 	{
