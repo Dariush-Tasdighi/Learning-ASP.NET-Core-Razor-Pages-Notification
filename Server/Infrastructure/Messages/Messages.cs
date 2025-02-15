@@ -1,4 +1,6 @@
-﻿namespace Infrastructure.Messages;
+﻿using System.Collections.Generic;
+
+namespace Infrastructure.Messages;
 
 public class Messages : object
 {
@@ -22,13 +24,11 @@ public class Messages : object
 			return null;
 		}
 
-		text =
-			text.Trim();
+		text = text.Trim();
 
 		while (text.Contains(value: "  "))
 		{
-			text =
-				text.Replace(oldValue: "  ", newValue: " ");
+			text = text.Replace(oldValue: "  ", newValue: " ");
 		}
 
 		return text;
@@ -36,30 +36,31 @@ public class Messages : object
 
 	public Messages() : base()
 	{
-		_pageErrors =
-			new System.Collections.Generic.List<string>();
+		_pageErrors = [];
+		_pageWarnings = [];
+		_pageSuccesses = [];
 
-		_pageWarnings =
-			new System.Collections.Generic.List<string>();
-
-		_pageSuccesses =
-			new System.Collections.Generic.List<string>();
-
-		_toastErrors =
-			new System.Collections.Generic.List<string>();
-
-		_toastWarnings =
-			new System.Collections.Generic.List<string>();
-
-		_toastSuccesses =
-			new System.Collections.Generic.List<string>();
+		_toastErrors = [];
+		_toastWarnings = [];
+		_toastSuccesses = [];
 	}
 
+	//public List<string> PageErrors { get; set; } = [];
+	//public List<string> PageErrors { get; init; } = [];
+	//private readonly List<string> _pageErrors = [];
+	//public List<string> PageErrors
+	//{
+	//	get
+	//	{
+	//		return _pageErrors;
+	//	}
+	//}
+
 	//[Newtonsoft.Json.JsonProperty]
-	private readonly System.Collections.Generic.List<string> _pageErrors;
+	private readonly List<string> _pageErrors = [];
 
 	//[Newtonsoft.Json.JsonIgnore]
-	public System.Collections.Generic.IReadOnlyList<string> PageErrors
+	public IReadOnlyList<string> PageErrors
 	{
 		get
 		{
@@ -67,9 +68,9 @@ public class Messages : object
 		}
 	}
 
-	private readonly System.Collections.Generic.List<string> _pageWarnings;
+	private readonly List<string> _pageWarnings;
 
-	public System.Collections.Generic.IReadOnlyList<string> PageWarnings
+	public IReadOnlyList<string> PageWarnings
 	{
 		get
 		{
@@ -77,9 +78,9 @@ public class Messages : object
 		}
 	}
 
-	private readonly System.Collections.Generic.List<string> _pageSuccesses;
+	private readonly List<string> _pageSuccesses;
 
-	public System.Collections.Generic.IReadOnlyList<string> PageSuccesses
+	public IReadOnlyList<string> PageSuccesses
 	{
 		get
 		{
@@ -104,9 +105,9 @@ public class Messages : object
 		}
 	}
 
-	private readonly System.Collections.Generic.List<string> _toastErrors;
+	private readonly List<string> _toastErrors;
 
-	public System.Collections.Generic.IReadOnlyList<string> ToastErrors
+	public IReadOnlyList<string> ToastErrors
 	{
 		get
 		{
@@ -114,9 +115,9 @@ public class Messages : object
 		}
 	}
 
-	private readonly System.Collections.Generic.List<string> _toastWarnings;
+	private readonly List<string> _toastWarnings;
 
-	public System.Collections.Generic.IReadOnlyList<string> ToastWarnings
+	public IReadOnlyList<string> ToastWarnings
 	{
 		get
 		{
@@ -124,9 +125,9 @@ public class Messages : object
 		}
 	}
 
-	private readonly System.Collections.Generic.List<string> _toastSuccesses;
+	private readonly List<string> _toastSuccesses;
 
-	public System.Collections.Generic.IReadOnlyList<string> ToastSuccesses
+	public IReadOnlyList<string> ToastSuccesses
 	{
 		get
 		{
@@ -153,8 +154,7 @@ public class Messages : object
 
 	public bool AddPageError(string? message)
 	{
-		message =
-			FixText(text: message);
+		message = FixText(text: message);
 
 		if (message is null)
 		{
@@ -173,8 +173,7 @@ public class Messages : object
 
 	public bool AddPageWarning(string? message)
 	{
-		message =
-			FixText(text: message);
+		message = FixText(text: message);
 
 		if (message is null)
 		{
@@ -193,8 +192,7 @@ public class Messages : object
 
 	public bool AddPageSuccess(string? message)
 	{
-		message =
-			FixText(text: message);
+		message = FixText(text: message);
 
 		if (message is null)
 		{
@@ -213,8 +211,7 @@ public class Messages : object
 
 	public bool AddToastError(string? message)
 	{
-		message =
-			FixText(text: message);
+		message = FixText(text: message);
 
 		if (message is null)
 		{
@@ -233,8 +230,7 @@ public class Messages : object
 
 	public bool AddToastWarning(string? message)
 	{
-		message =
-			FixText(text: message);
+		message = FixText(text: message);
 
 		if (message is null)
 		{
@@ -253,8 +249,7 @@ public class Messages : object
 
 	public bool AddToastSuccess(string? message)
 	{
-		message =
-			FixText(text: message);
+		message = FixText(text: message);
 
 		if (message is null)
 		{

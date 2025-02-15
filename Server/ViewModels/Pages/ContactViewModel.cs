@@ -8,38 +8,19 @@ public class ContactViewModel : object
 	{
 	}
 
-	// **********
 	[Display(Name = "Full Name")]
-
-	[Required(AllowEmptyStrings = false,
-		ErrorMessage = "You did not specify {0}!")]
-
-	[StringLength(maximumLength: 50,
-		ErrorMessage = "The maximum length of {0} is {1}!")]
+	[StringLength(maximumLength: 50)]
+	[Required(AllowEmptyStrings = false)]
 	public string? FullName { get; set; }
-	// **********
 
-	// **********
 	[Display(Name = "Subject")]
-
-	[Required(AllowEmptyStrings = false,
-		ErrorMessage = "You did not specify {0}!")]
-
-	[StringLength(maximumLength: 100,
-		ErrorMessage = "The maximum length of {0} is {1}!")]
+	[StringLength(maximumLength: 100)]
+	[Required(AllowEmptyStrings = false)]
 	public string? Subject { get; set; }
-	// **********
 
-	// **********
 	[Display(Name = "Body")]
-
-	[Required(AllowEmptyStrings = false,
-		ErrorMessage = "You did not specify {0}!")]
-
-	[StringLength(maximumLength: 1000,
-		ErrorMessage = "The maximum length of {0} is {1}!")]
-
+	[StringLength(maximumLength: 1000)]
+	[Required(AllowEmptyStrings = false)]
 	[DataType(dataType: DataType.MultilineText)]
 	public string? Body { get; set; }
-	// **********
 }

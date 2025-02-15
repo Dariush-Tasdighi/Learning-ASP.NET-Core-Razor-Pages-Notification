@@ -1,13 +1,15 @@
-﻿using Microsoft.AspNetCore.Builder;
+﻿using System.Diagnostics;
+using Microsoft.AspNetCore.Builder;
+using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.DependencyInjection;
 
 var webApplicationOptions = new WebApplicationOptions
 {
+	//EnvironmentName = Environments.Production,
+	//EnvironmentName = Environments.Development,
+
 	EnvironmentName =
-		System.Diagnostics.Debugger.IsAttached ?
-		Microsoft.Extensions.Hosting.Environments.Development
-		:
-		Microsoft.Extensions.Hosting.Environments.Production,
+		Debugger.IsAttached ? Environments.Development : Environments.Production,
 };
 
 var builder =
@@ -25,6 +27,7 @@ app.UseStaticFiles();
 app.UseRouting();
 app.UseAuthentication();
 app.UseAuthorization();
+
 app.MapRazorPages();
 app.UseEndpoints(endpoints =>
 {

@@ -1,9 +1,8 @@
 ﻿@page
 @model Server.Pages.ContactModel
-@{
-	var pageTitle =
-		"Contact (ASP.NET Core Razor Pages)";
 
+@{
+	var pageTitle = "Contact (ASP.NET Core Razor Pages)";
 	ViewData["PageTitle"] = pageTitle;
 }
 
@@ -21,10 +20,12 @@
 				<partial name="PartialViews/_DisplayPageMessages" />
 
 				<div class="mb-3">
+					@* <span>Full Name</span> *@
 					<label asp-for="ViewModel.FullName" class="form-label"></label>
 
 					<div class="input-group">
 						<div class="input-group-text"><i class="bi bi-person-fill"></i></div>
+						@* <input type="text" value="@(ViewModel.FullName)" /> *@
 						<input asp-for="ViewModel.FullName" class="form-control" />
 					</div>
 
