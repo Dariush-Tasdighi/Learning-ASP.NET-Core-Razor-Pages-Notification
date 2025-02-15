@@ -1,26 +1,23 @@
-﻿@{
-	/// Version 3.0
+﻿@using Infrastructure.Messages
 
+@{
 	int delayStep = 1000;
 	int delay = 4000 - delayStep;
 
 	// نکته مهم
 	// در همه شرایط کار نمی‌کند List استفاده از کلاس
 	var toastErrors =
-		TempData[key: Infrastructure.Messages.MessageType.ToastError.ToString()] as
-		System.Collections.Generic.IList<string>;
+		TempData[key: MessageType.ToastError.ToString()] as IList<string>;
 
 	var toastWarnings =
-		TempData[key: Infrastructure.Messages.MessageType.ToastWarning.ToString()] as
-		System.Collections.Generic.IList<string>;
+		TempData[key: MessageType.ToastWarning.ToString()] as IList<string>;
 
 	var toastSuccesses =
-		TempData[key: Infrastructure.Messages.MessageType.ToastSuccess.ToString()] as
-		System.Collections.Generic.IList<string>;
+		TempData[key: MessageType.ToastSuccess.ToString()] as IList<string>;
 
-	if ((toastErrors == null || toastErrors.Count == 0) &&
-		(toastWarnings == null || toastWarnings.Count == 0) &&
-		(toastSuccesses == null || toastSuccesses.Count == 0))
+	if ((toastErrors is null || toastErrors.Count == 0) &&
+		(toastWarnings is null || toastWarnings.Count == 0) &&
+		(toastSuccesses is null || toastSuccesses.Count == 0))
 	{
 		return;
 	}
@@ -30,7 +27,7 @@
 	<div class="toast-container position-absolute top-25 end-0 p-3 opacity-50" style="z-index: 10000;">
 
 		@{
-			if (toastErrors != null)
+			if (toastErrors is not null)
 			{
 				foreach (var message in toastErrors)
 				{
@@ -47,7 +44,7 @@
 				}
 			}
 
-			if (toastWarnings != null)
+			if (toastWarnings is not null)
 			{
 				foreach (var message in toastWarnings)
 				{
@@ -64,7 +61,7 @@
 				}
 			}
 
-			if (toastSuccesses != null)
+			if (toastSuccesses is not null)
 			{
 				foreach (var message in toastSuccesses)
 				{

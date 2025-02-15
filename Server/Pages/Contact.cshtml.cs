@@ -1,6 +1,8 @@
+using Infrastructure;
+
 namespace Server.Pages
 {
-	public class ContactModel : Infrastructure.BasePageModel
+	public class ContactModel : BasePageModel
 	{
 		public ContactModel() : base()
 		{

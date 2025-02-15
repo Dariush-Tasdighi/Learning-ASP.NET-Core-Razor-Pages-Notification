@@ -1,16 +1,12 @@
-﻿namespace Infrastructure.Messages
-{
-	/// <summary>
-	/// Version 3.0
-	/// </summary>
-	public enum MessageType : byte
-	{
-		PageError,
-		PageWarning,
-		PageSuccess,
+﻿namespace Infrastructure.Messages;
 
-		ToastError,
-		ToastWarning,
-		ToastSuccess,
-	}
+public enum MessageType : byte
+{
+	PageError = 10,
+	PageWarning = 11,
+	PageSuccess = 12,
+
+	ToastError = 20,
+	ToastWarning = 21,
+	ToastSuccess = 22,
 }

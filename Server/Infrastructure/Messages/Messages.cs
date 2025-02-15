@@ -1,363 +1,358 @@
-﻿namespace Infrastructure.Messages
+﻿namespace Infrastructure.Messages;
+
+public class Messages : object
 {
-	/// <summary>
-	/// Version 2.0
-	/// کلاس مناسبی که متاسفانه برای این منظور کاربردی ندارد
-	/// </summary>
-	public class Messages : object
+	public enum MessageType
 	{
-		public enum MessageType
-		{
-			PageError,
-			PageWarning,
-			PageSuccess,
+		PageError,
+		PageWarning,
+		PageSuccess,
 
-			ToastError,
-			ToastWarning,
-			ToastSuccess,
+		ToastError,
+		ToastWarning,
+		ToastSuccess,
+	}
+
+	public static readonly string KeyName = "Messages";
+
+	public static string? FixText(string? text)
+	{
+		if (string.IsNullOrWhiteSpace(value: text))
+		{
+			return null;
 		}
 
-		public static readonly string KeyName = "Messages";
+		text =
+			text.Trim();
 
-		public static string? FixText(string? text)
+		while (text.Contains(value: "  "))
 		{
-			if (string.IsNullOrWhiteSpace(text))
-			{
-				return null;
-			}
-
 			text =
-				text.Trim();
-
-			while (text.Contains("  "))
-			{
-				text =
-					text.Replace("  ", " ");
-			}
-
-			return text;
+				text.Replace(oldValue: "  ", newValue: " ");
 		}
 
-		public Messages() : base()
+		return text;
+	}
+
+	public Messages() : base()
+	{
+		_pageErrors =
+			new System.Collections.Generic.List<string>();
+
+		_pageWarnings =
+			new System.Collections.Generic.List<string>();
+
+		_pageSuccesses =
+			new System.Collections.Generic.List<string>();
+
+		_toastErrors =
+			new System.Collections.Generic.List<string>();
+
+		_toastWarnings =
+			new System.Collections.Generic.List<string>();
+
+		_toastSuccesses =
+			new System.Collections.Generic.List<string>();
+	}
+
+	//[Newtonsoft.Json.JsonProperty]
+	private readonly System.Collections.Generic.List<string> _pageErrors;
+
+	//[Newtonsoft.Json.JsonIgnore]
+	public System.Collections.Generic.IReadOnlyList<string> PageErrors
+	{
+		get
 		{
-			_pageErrors =
-				new System.Collections.Generic.List<string>();
-
-			_pageWarnings =
-				new System.Collections.Generic.List<string>();
-
-			_pageSuccesses =
-				new System.Collections.Generic.List<string>();
-
-			_toastErrors =
-				new System.Collections.Generic.List<string>();
-
-			_toastWarnings =
-				new System.Collections.Generic.List<string>();
-
-			_toastSuccesses =
-				new System.Collections.Generic.List<string>();
+			return _pageErrors;
 		}
+	}
 
-		//[Newtonsoft.Json.JsonProperty]
-		private readonly System.Collections.Generic.List<string> _pageErrors;
+	private readonly System.Collections.Generic.List<string> _pageWarnings;
 
-		//[Newtonsoft.Json.JsonIgnore]
-		public System.Collections.Generic.IReadOnlyList<string> PageErrors
+	public System.Collections.Generic.IReadOnlyList<string> PageWarnings
+	{
+		get
 		{
-			get
-			{
-				return _pageErrors;
-			}
+			return _pageWarnings;
 		}
+	}
 
-		private readonly System.Collections.Generic.List<string> _pageWarnings;
+	private readonly System.Collections.Generic.List<string> _pageSuccesses;
 
-		public System.Collections.Generic.IReadOnlyList<string> PageWarnings
+	public System.Collections.Generic.IReadOnlyList<string> PageSuccesses
+	{
+		get
 		{
-			get
-			{
-				return _pageWarnings;
-			}
+			return _pageSuccesses;
 		}
+	}
 
-		private readonly System.Collections.Generic.List<string> _pageSuccesses;
-
-		public System.Collections.Generic.IReadOnlyList<string> PageSuccesses
+	public bool HasAnyPageMessages
+	{
+		get
 		{
-			get
-			{
-				return _pageSuccesses;
-			}
-		}
-
-		public bool HasAnyPageMessages
-		{
-			get
-			{
-				if ((_pageErrors == null || _pageErrors.Count == 0) &&
-					(_pageWarnings == null || _pageWarnings.Count == 0) &&
-					(_pageSuccesses == null || _pageSuccesses.Count == 0))
-				{
-					return false;
-				}
-				else
-				{
-					return true;
-				}
-			}
-		}
-
-		private readonly System.Collections.Generic.List<string> _toastErrors;
-
-		public System.Collections.Generic.IReadOnlyList<string> ToastErrors
-		{
-			get
-			{
-				return _toastErrors;
-			}
-		}
-
-		private readonly System.Collections.Generic.List<string> _toastWarnings;
-
-		public System.Collections.Generic.IReadOnlyList<string> ToastWarnings
-		{
-			get
-			{
-				return _toastWarnings;
-			}
-		}
-
-		private readonly System.Collections.Generic.List<string> _toastSuccesses;
-
-		public System.Collections.Generic.IReadOnlyList<string> ToastSuccesses
-		{
-			get
-			{
-				return _toastSuccesses;
-			}
-		}
-
-		public bool HasAnyToastMessages
-		{
-			get
-			{
-				if ((_toastErrors == null || _toastErrors.Count == 0) &&
-					(_toastWarnings == null || _toastWarnings.Count == 0) &&
-					(_toastSuccesses == null || _toastSuccesses.Count == 0))
-				{
-					return false;
-				}
-				else
-				{
-					return true;
-				}
-			}
-		}
-
-		public bool AddPageError(string? message)
-		{
-			message =
-				FixText(text: message);
-
-			if (message == null)
+			if ((_pageErrors is null || _pageErrors.Count == 0) &&
+				(_pageWarnings is null || _pageWarnings.Count == 0) &&
+				(_pageSuccesses is null || _pageSuccesses.Count == 0))
 			{
 				return false;
 			}
+			else
+			{
+				return true;
+			}
+		}
+	}
 
-			if (_pageErrors.Contains(item: message))
+	private readonly System.Collections.Generic.List<string> _toastErrors;
+
+	public System.Collections.Generic.IReadOnlyList<string> ToastErrors
+	{
+		get
+		{
+			return _toastErrors;
+		}
+	}
+
+	private readonly System.Collections.Generic.List<string> _toastWarnings;
+
+	public System.Collections.Generic.IReadOnlyList<string> ToastWarnings
+	{
+		get
+		{
+			return _toastWarnings;
+		}
+	}
+
+	private readonly System.Collections.Generic.List<string> _toastSuccesses;
+
+	public System.Collections.Generic.IReadOnlyList<string> ToastSuccesses
+	{
+		get
+		{
+			return _toastSuccesses;
+		}
+	}
+
+	public bool HasAnyToastMessages
+	{
+		get
+		{
+			if ((_toastErrors is null || _toastErrors.Count == 0) &&
+				(_toastWarnings is null || _toastWarnings.Count == 0) &&
+				(_toastSuccesses is null || _toastSuccesses.Count == 0))
 			{
 				return false;
 			}
+			else
+			{
+				return true;
+			}
+		}
+	}
 
-			_pageErrors.Add(item: message);
+	public bool AddPageError(string? message)
+	{
+		message =
+			FixText(text: message);
 
-			return true;
+		if (message is null)
+		{
+			return false;
 		}
 
-		public bool AddPageWarning(string? message)
+		if (_pageErrors.Contains(item: message))
 		{
-			message =
-				FixText(text: message);
+			return false;
+		}
 
-			if (message == null)
+		_pageErrors.Add(item: message);
+
+		return true;
+	}
+
+	public bool AddPageWarning(string? message)
+	{
+		message =
+			FixText(text: message);
+
+		if (message is null)
+		{
+			return false;
+		}
+
+		if (_pageWarnings.Contains(item: message))
+		{
+			return false;
+		}
+
+		_pageWarnings.Add(item: message);
+
+		return true;
+	}
+
+	public bool AddPageSuccess(string? message)
+	{
+		message =
+			FixText(text: message);
+
+		if (message is null)
+		{
+			return false;
+		}
+
+		if (_pageSuccesses.Contains(item: message))
+		{
+			return false;
+		}
+
+		_pageSuccesses.Add(item: message);
+
+		return true;
+	}
+
+	public bool AddToastError(string? message)
+	{
+		message =
+			FixText(text: message);
+
+		if (message is null)
+		{
+			return false;
+		}
+
+		if (_toastErrors.Contains(item: message))
+		{
+			return false;
+		}
+
+		_toastErrors.Add(item: message);
+
+		return true;
+	}
+
+	public bool AddToastWarning(string? message)
+	{
+		message =
+			FixText(text: message);
+
+		if (message is null)
+		{
+			return false;
+		}
+
+		if (_toastWarnings.Contains(item: message))
+		{
+			return false;
+		}
+
+		_toastWarnings.Add(item: message);
+
+		return true;
+	}
+
+	public bool AddToastSuccess(string? message)
+	{
+		message =
+			FixText(text: message);
+
+		if (message is null)
+		{
+			return false;
+		}
+
+		if (_toastSuccesses.Contains(item: message))
+		{
+			return false;
+		}
+
+		_toastSuccesses.Add(item: message);
+
+		return true;
+	}
+
+	public bool AddMessage(MessageType type, string? message)
+	{
+		switch (type)
+		{
+			case MessageType.PageError:
+			{
+				return AddPageError(message: message);
+			}
+
+			case MessageType.PageWarning:
+			{
+				return AddPageWarning(message: message);
+			}
+
+			case MessageType.PageSuccess:
+			{
+				return AddPageSuccess(message: message);
+			}
+
+			case MessageType.ToastError:
+			{
+				return AddToastError(message: message);
+			}
+
+			case MessageType.ToastWarning:
+			{
+				return AddToastWarning(message: message);
+			}
+
+			case MessageType.ToastSuccess:
+			{
+				return AddToastSuccess(message: message);
+			}
+
+			default:
 			{
 				return false;
 			}
-
-			if (_pageWarnings.Contains(item: message))
-			{
-				return false;
-			}
-
-			_pageWarnings.Add(item: message);
-
-			return true;
 		}
+	}
 
-		public bool AddPageSuccess(string? message)
-		{
-			message =
-				FixText(text: message);
+	public void ClearPageErrors()
+	{
+		_pageErrors.Clear();
+	}
 
-			if (message == null)
-			{
-				return false;
-			}
+	public void ClearPageWarnings()
+	{
+		_pageWarnings.Clear();
+	}
 
-			if (_pageSuccesses.Contains(item: message))
-			{
-				return false;
-			}
+	public void ClearPageSuccesses()
+	{
+		_pageSuccesses.Clear();
+	}
 
-			_pageSuccesses.Add(item: message);
+	public void ClearPageMessages()
+	{
+		ClearPageErrors();
+		ClearPageWarnings();
+		ClearPageSuccesses();
+	}
 
-			return true;
-		}
+	public void ClearToastErrors()
+	{
+		_toastErrors.Clear();
+	}
 
-		public bool AddToastError(string? message)
-		{
-			message =
-				FixText(text: message);
+	public void ClearToastWarnings()
+	{
+		_toastWarnings.Clear();
+	}
 
-			if (message == null)
-			{
-				return false;
-			}
+	public void ClearToastSuccesses()
+	{
+		_toastSuccesses.Clear();
+	}
 
-			if (_toastErrors.Contains(item: message))
-			{
-				return false;
-			}
-
-			_toastErrors.Add(item: message);
-
-			return true;
-		}
-
-		public bool AddToastWarning(string? message)
-		{
-			message =
-				FixText(text: message);
-
-			if (message == null)
-			{
-				return false;
-			}
-
-			if (_toastWarnings.Contains(item: message))
-			{
-				return false;
-			}
-
-			_toastWarnings.Add(item: message);
-
-			return true;
-		}
-
-		public bool AddToastSuccess(string? message)
-		{
-			message =
-				FixText(text: message);
-
-			if (message == null)
-			{
-				return false;
-			}
-
-			if (_toastSuccesses.Contains(item: message))
-			{
-				return false;
-			}
-
-			_toastSuccesses.Add(item: message);
-
-			return true;
-		}
-
-		public bool AddMessage(MessageType type, string? message)
-		{
-			switch (type)
-			{
-				case MessageType.PageError:
-				{
-					return AddPageError(message: message);
-				}
-
-				case MessageType.PageWarning:
-				{
-					return AddPageWarning(message: message);
-				}
-
-				case MessageType.PageSuccess:
-				{
-					return AddPageSuccess(message: message);
-				}
-
-				case MessageType.ToastError:
-				{
-					return AddToastError(message: message);
-				}
-
-				case MessageType.ToastWarning:
-				{
-					return AddToastWarning(message: message);
-				}
-
-				case MessageType.ToastSuccess:
-				{
-					return AddToastSuccess(message: message);
-				}
-
-				default:
-				{
-					return false;
-				}
-			}
-		}
-
-		public void ClearPageErrors()
-		{
-			_pageErrors.Clear();
-		}
-
-		public void ClearPageWarnings()
-		{
-			_pageWarnings.Clear();
-		}
-
-		public void ClearPageSuccesses()
-		{
-			_pageSuccesses.Clear();
-		}
-
-		public void ClearPageMessages()
-		{
-			ClearPageErrors();
-			ClearPageWarnings();
-			ClearPageSuccesses();
-		}
-
-		public void ClearToastErrors()
-		{
-			_toastErrors.Clear();
-		}
-
-		public void ClearToastWarnings()
-		{
-			_toastWarnings.Clear();
-		}
-
-		public void ClearToastSuccesses()
-		{
-			_toastSuccesses.Clear();
-		}
-
-		public void ClearToastMessages()
-		{
-			ClearToastErrors();
-			ClearToastWarnings();
-			ClearToastSuccesses();
-		}
+	public void ClearToastMessages()
+	{
+		ClearToastErrors();
+		ClearToastWarnings();
+		ClearToastSuccesses();
 	}
 }

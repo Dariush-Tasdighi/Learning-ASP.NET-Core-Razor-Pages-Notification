@@ -1,28 +1,25 @@
-﻿namespace Infrastructure
+﻿namespace Infrastructure;
+
+public static class Utility : object
 {
-	public static class Utility
+	static Utility()
 	{
-		static Utility()
+	}
+
+	public static string? FixText(string? text)
+	{
+		if (string.IsNullOrWhiteSpace(value: text))
 		{
+			return null;
 		}
 
-		public static string? FixText(string? text)
+		text = text.Trim();
+
+		while (text.Contains(value: "  "))
 		{
-			if (string.IsNullOrWhiteSpace(text))
-			{
-				return null;
-			}
-
-			text =
-				text.Trim();
-
-			while (text.Contains("  "))
-			{
-				text =
-					text.Replace("  ", " ");
-			}
-
-			return text;
+			text = text.Replace(oldValue: "  ", newValue: " ");
 		}
+
+		return text;
 	}
 }

@@ -1,13 +1,14 @@
-namespace Server.Pages
-{
-	public class IndexModel : Infrastructure.BasePageModel
-	{
-		public IndexModel() : base()
-		{
-		}
+using Infrastructure;
 
-		public void OnGet()
-		{
-		}
+namespace Server.Pages;
+
+public class IndexModel : BasePageModel
+{
+	public IndexModel() : base()
+	{
+	}
+
+	public void OnGet()
+	{
 	}
 }

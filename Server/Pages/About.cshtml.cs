@@ -1,6 +1,8 @@
+using Infrastructure;
+
 namespace Server.Pages
 {
-	public class AboutModel : Infrastructure.BasePageModel
+	public class AboutModel : BasePageModel
 	{
 		public AboutModel() : base()
 		{
